@@ -55,6 +55,7 @@
         "#from https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_morphological_ops/py_morphological_ops.html\n",
         "import cv2\n",
         "import numpy as np\n",
+        # Importando as bibliotecas OpenCV e Numpy para usar no código, abreviando numpy para np.
         "#caso for usar o Google Colab com a OpenCV, usar a lib abaixo\n",
         "from google.colab.patches import cv2_imshow\n"
       ]
@@ -62,11 +63,18 @@
     {
       "cell_type": "code",
       "source": [
+       # Lendo as 3 imagens entre () e salvando cada uma em uma variável.
         "img = cv2.imread('j.png',0)\n",
         "img_opening = cv2.imread('j_ruido.png',0)\n",
         "img_closing = cv2.imread('j_furos.png',0)\n",
+        #img.shape trás a quantidade de linhas e colunas contidas na imagem.
+        # caso a imagem seja colorida, trará também de forma organizada as quantias de tons rgb.
+        # o resultado será salvo nas variáveis altura e largura.
         "altura, largura = img.shape\n",
+        # Na próxima linha é usada a função "np.ones" que cria uma matriz de numero 1 apenas, com tamanho definido entre parênteses.
+        # Após criar é atribuido o tipo de data, no caso usigned (sem sinal), inteiro, e com 8 bits, abreviado em "np.uint8".
         "kernel = np.ones((5,5),np.uint8)\n",
+        # A linha a seguir printa a variável criada na tela.
         "print(kernel)"
       ],
       "metadata": {
@@ -78,7 +86,10 @@
     {
       "cell_type": "code",
       "source": [
+      # A proxima linha tras a função cv2.erode, que corrói a imagem definida entre parenteses junto com a matriz kernel criada acima.
+      # E a quantia de vezes que será corroída é definida por iterations, no caso igual a 2 vezes.
         "erosion = cv2.erode(img,kernel,iterations = 2)\n",
+      # Esta parte irá usar a função cv2.dilate que irá dilatar a imagem, sendo aplicada também duas vezes.
         "dilation = cv2.dilate(img,kernel,iterations = 2)"
       ],
       "metadata": {
