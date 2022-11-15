@@ -87,9 +87,11 @@
       "cell_type": "code",
       "source": [
       # A proxima linha tras a função cv2.erode, que corrói a imagem definida entre parenteses junto com a matriz kernel criada acima.
-      # E a quantia de vezes que será corroída é definida por iterations, no caso igual a 2 vezes.
+      # E a quantia de vezes que será corroída é definida por iterations, no caso igual a 2 vezes, tornando a parte branca da imagemn mais fino.
+      # Após isso a nova imagem é salva em erosion.
         "erosion = cv2.erode(img,kernel,iterations = 2)\n",
-      # Esta parte irá usar a função cv2.dilate que irá dilatar a imagem, sendo aplicada também duas vezes.
+      # Esta parte irá usar a função cv2.dilate que irá dilatar a imagem, sendo aplicada também duas vezes, no caso com efeito contrário da primeira.
+      # Tendo como função a ampliação da parte branca da imagem após isso a nova imagem é salva em dilation.
         "dilation = cv2.dilate(img,kernel,iterations = 2)"
       ],
       "metadata": {
@@ -101,8 +103,18 @@
     {
       "cell_type": "code",
       "source": [
+      # As transformações morfológicas decorrerão do valor kernel recebido na aplicação, que serão utilizados de forma autonoma para transformar a imagem em uma nova imagem.
+      
+      # A função cv2.MORPH_GRADIENT usará a imagem e a estrutura kernel criada, e nos trará a diferença entre a erosão e a dilatação da imagem.
+      # Essa diferença pode ser vista como um contorno da imagem em primeiro plano, o resultado dessa função será salvo na variável gradient.
         "gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)\n",
+        
+      # A segunda transformação morfológica usa função cv2.MORPH_OPEN, a imagem img_opening e também a estrutura kernel, esta função tem como finalidade;
+      # a remoção de erros ("ruídos" ou "noise") da imagem, essa função utiliza a erosão seguida da dilatação para fazer estes reparos, tornando a imagem mais "limpa".
         "opening = cv2.morphologyEx(img_opening, cv2.MORPH_OPEN, kernel)\n",
+        
+      # A última transformação utilizada foi a cv2.MORPH_CLOSE, que usa a imagem img_closing juntamente à estrutura kernel, ela faz o trabalho inverso da função acima;
+      # mas serve também para limpeza da imagem, no caso do objeto principal, removendo pequenas falhas ou orifícios que nele contia.
         "closing = cv2.morphologyEx(img_closing, cv2.MORPH_CLOSE, kernel)"
       ],
       "metadata": {
@@ -115,6 +127,8 @@
       "cell_type": "code",
       "source": [
         "'''\n",
+        # As linhas a seguir identificadas por imshow servirão para mostrar os resultados de todas operações feitas anteriormente.
+        # Sendo cada uma descrita pela variável que foi salva de acordo, imprimindo uma a uma, respectivamente, após isso a finalização do código.
         "#Caso usa com Python no próprio computador\n",
         "cv2.imshow('in', img)\n",
         "cv2.imshow('erosion_out', erosion)\n",
