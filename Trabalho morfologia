@@ -63,7 +63,7 @@
     {
       "cell_type": "code",
       "source": [
-       # Lendo as 3 imagens entre () e salvando cada uma em uma variável.
+       # Lendo as 3 imagens entre (), em preto e branco, e salvando cada uma em uma variável.
         "img = cv2.imread('j.png',0)\n",
         "img_opening = cv2.imread('j_ruido.png',0)\n",
         "img_closing = cv2.imread('j_furos.png',0)\n",
